@@ -1,0 +1,6 @@
+---
+common:
+  packages: [ openntpd,python-apt,python-pycurl,curl ]
+  ntp_service: openntpd
+  ntp_config: /etc/openntpd
+  timezone: Europe/Madrid

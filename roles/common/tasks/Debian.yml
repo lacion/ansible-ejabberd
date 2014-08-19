@@ -1,0 +1,16 @@
+---
+
+#- name: Update the distro
+#  apt: upgrade=safe update_cache=yes cache_valid_time=3600
+
+- name: Install common DEB packages
+  apt: name={{item}} state=present cache_valid_time=7200
+  with_items: common.packages
+
+#- name: Set box hostname
+#  hostname: name={{ common_hostname }}
+#  when: common_hostname is defined
+
+- name: Set /etc/timezone to {{ common.timezone }}
+  template: dest=/etc/timezone src=timezone.j2
+  notify: update tzdata

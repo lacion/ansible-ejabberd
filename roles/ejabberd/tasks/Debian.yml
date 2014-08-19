@@ -1,0 +1,14 @@
+---
+
+- name: install ejabberd
+  apt: pkg={{ ejabberd_pkg }}
+
+- name: install ejabberd config
+  template: dest=/etc/ejabberd/ejabberd.cfg src=ejabberd.j2
+  notify: restart ejabberd
+
+- name: admin user creation
+  action: ejabberd_user username=admin host={{ fqdn }} password=test
+
+- name: admin user creation
+  action: ejabberd_user username=test host={{ fqdn }} password=test

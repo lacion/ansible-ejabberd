@@ -1,0 +1,9 @@
+# Deploy ejabberd
+---
+- name: deploy common components
+  hosts: all:!localhost
+  sudo: True
+  roles:
+    - common
+    - ejabberd
+    - converse

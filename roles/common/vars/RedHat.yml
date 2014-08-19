@@ -1,0 +1,5 @@
+---
+common:
+  packages: [ libselinux-python, ntp, curl, python-pycurl ]
+  ntp_service: ntpd
+  ntp_config: /etc/ntp.conf

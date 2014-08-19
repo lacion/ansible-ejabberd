@@ -1,0 +1,10 @@
+server {
+    listen        80;
+    server_name   {{ fqdn }};
+    error_log     /opt/converse/nginx_www.error.log;
+
+    location / {
+        autoindex         on;
+        alias             /opt/converse/;
+    }
+}

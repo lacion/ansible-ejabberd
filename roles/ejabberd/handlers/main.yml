@@ -1,0 +1,5 @@
+---
+
+- name: restart ejabberd
+  service: name={{ejabberd_service}} state=restarted
+

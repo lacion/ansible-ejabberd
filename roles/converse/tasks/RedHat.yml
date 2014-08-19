@@ -1,0 +1,22 @@
+---
+- name: Install nginx RPM packages
+  yum: name={{item}} state=present
+  with_items: packages
+
+- name: Create XMPP Directory
+  file: path=/opt/converse state=directory owner=nginx group=nginx
+
+- name: copy web client files
+  copy: src={{item}} dest=/opt/converse/{{item}} owner=nginx group=nginx
+  with_items:
+  - converse.min.css
+  - converse.website.min.js
+  - header-bg.jpg
+  - style.css
+
+- name: copy converse index
+  template: dest=/opt/converse/index.html src=index.html.j2 owner=nginx group=nginx
+
+- name: install nginx site
+  template: dest=/etc/nginx/conf.d/site.conf src=site.conf.j2
+  notify: restart nginx

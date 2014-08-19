@@ -1,0 +1,20 @@
+---
+
+- name: install pyliblzma
+  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/pyliblzma-0.5.3-3.el6.x86_64.rpm state=present
+
+- name: install epel
+  yum: name=http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+
+- name: Install ejabberd package
+  yum: name={{ ejabberd_pkg }} state=present
+
+- name: install ejabberd config
+  template: dest=/etc/ejabberd/ejabberd.cfg src=ejabberd.j2
+  notify: restart ejabberd
+
+- name: admin user setting test password
+  action: ejabberd_user username=admin host={{ fqdn }} password=test
+
+- name: test user creation
+  action: ejabberd_user username=test host={{ fqdn }} password=test

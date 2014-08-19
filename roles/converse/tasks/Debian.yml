@@ -1,0 +1,16 @@
+---
+
+- name: Install nginx DEB packages
+  apt: name={{item}} state=present cache_valid_time=7200
+  with_items: packages
+
+- name: Create XMPP Directory
+  file: path=/opt/converse state=directory owner=www-data group=www-data
+
+- name: copy web client files
+  copy: src={{item}} dest=/opt/converse/{{item}} owner=www-data group=www-data
+  with_items:
+  - converse.min.css
+  - converse.website.min.js
+  - header-bg.jpg
+  - style.css

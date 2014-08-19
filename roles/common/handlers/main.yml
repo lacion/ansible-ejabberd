@@ -1,0 +1,7 @@
+---
+
+- name: restart ntp
+  service: name={{common.ntp_service}} state=restarted
+
+- name: update tzdata
+  command: dpkg-reconfigure --frontend noninteractive tzdata
