@@ -38,8 +38,6 @@ the status of the `Vagrant`_ boxes you can::
 
     $ ansible -i inventory/vagrant.inv all -m ping
 
-Note: **THIS** will give you an error when connecting to localhost. That is expected, Ignore.
-
 2 Test users are created by default 1. the admin user with password test, the other a user called test with the same password.
 
 a web client is installed by default for testing purposes accesible in port 80.
