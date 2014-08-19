@@ -27,7 +27,7 @@ The ejabberd deploy project comes with a working `Vagrant`_ configuration includ
 vagrant inventory. To deploy to `Vagrant`_, simply::
 
     $ vagrant up
-    $ ansible-playbook -i inventory/vagrant.inv logging.yml
+    $ ansible-playbook -i inventory/vagrant.inv jabber.yml
 
 Note: Vagrant >= 1.5 is needed for this and the extensions pack is necessary
 
