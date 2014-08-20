@@ -1,0 +1,7 @@
+---
+##
+##export AWS_ACCESS_KEY_ID='xxx'
+##export AWS_SECRET_ACCESS_KEY='xxx'
+##
+ec2_access_key: xxx 
+ec2_secret_key: xxx 

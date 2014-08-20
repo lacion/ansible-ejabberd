@@ -1,9 +1,9 @@
 # Deploy ejabberd
 ---
 - name: deploy common components
-  hosts: all:!localhost
+  hosts: tag_Deployment_Jabber:ubuntu14:debian7:centos6:!localhost
   sudo: True
   roles:
     - common
-    - ejabberd
     - converse
+    - ejabberd

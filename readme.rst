@@ -44,6 +44,21 @@ a web client is installed by default for testing purposes accesible in port 80.
 
 for easy of testing this deployment comes with a vagrant file with 3 boxes debian,ubuntu,centos all install a fully functioning jabber server with a web client. aditional users should be created eihter with the ejabberd webui or ejabberdctl
 
+EC2
+---
+
+to provision EC2 you can use::
+  
+  ansible-playbook -i inventory/local.inv ec2-prov.yml
+
+you will need to have aws_vars/aws-creds.yml with your credential for this to work.
+
+after ec2 has been provisioned you can deploy with::
+
+  ansible-playbook -i ec2.py jabber.yml
+
+there is a bit of an issue here using default cominity AMI's and is that they all have root disabled and no default standart user, so you will have to use -u ubuntu or whatever default user there is for debian and centos distro
+
 
 .. _`Ansible`: http://ansible.com
 .. _`Virtualenv`: http://www.virtualenv.org/

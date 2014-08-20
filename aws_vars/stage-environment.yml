@@ -1,0 +1,82 @@
+---
+# set these parameters to control the region, keypair, and AMI that are launched
+ec2_region: eu-west-1
+instances_keypair: luismorales 
+#image_id: ami-bf5021d6
+
+# security groups to be created
+security_groups:
+  - name: ssh
+    desc: the security group for ssh
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+
+  - name: web
+    desc: the security group for the web server 
+    rules:
+      - proto: tcp
+        from_port: "80"
+        to_port: "80"
+        cidr_ip: 0.0.0.0/0
+  - name: jabber
+    desc: the security group for the jabber server 
+    rules:
+      - proto: tcp
+        from_port: "5222"
+        to_port: "5222"
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: "5269"
+        to_port: "5269"
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: "5280"
+        to_port: "5280"
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: "5281"
+        to_port: "5281"
+        cidr_ip: 0.0.0.0/0
+
+# Instances to launch be launched.
+# If you re-run the playbook after modifying exact_count,
+# instances will be terminated if the actual count > exact_count,
+# or new instances will be launched if actual count < exact_count.
+
+ec2_instances:
+  - instance_type: m3.medium
+    image: "ami-0307d674"
+    assign_public_ip: true
+    keypair: "{{instances_keypair}}"
+    group: ['ssh','web','jabber']
+    instance_tags: 
+        Name: ubuntu14
+        Deployment: Jabber
+    exact_count: 1
+    count_tag: 
+        Name: ubuntu14
+
+  - instance_type: m3.medium
+    image: "ami-210fcb56"
+    keypair: "{{instances_keypair}}"
+    group: ['ssh','web','jabber']
+    instance_tags: 
+        Name: debian7
+        Deployment: Jabber
+    exact_count: 1
+    count_tag: 
+        Name: debian7
+
+  - instance_type: m3.medium
+    image: "ami-1d50816a"
+    keypair: "{{instances_keypair}}"
+    group: ['ssh','web','jabber']
+    instance_tags: 
+        Name: centos6
+        Deployment: Jabber
+    exact_count: 1
+    count_tag: 
+        Name: centos6

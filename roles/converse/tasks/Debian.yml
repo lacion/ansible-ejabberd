@@ -14,3 +14,10 @@
   - converse.website.min.js
   - header-bg.jpg
   - style.css
+
+- name: copy converse index
+  template: dest=/opt/converse/index.html src=index.html.j2 owner=www-data group=www-data
+
+- name: install nginx site
+  template: dest=/etc/nginx/sites-enabled/default src=site.conf.j2
+  notify: restart nginx
